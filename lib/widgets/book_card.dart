@@ -12,7 +12,7 @@ class BookCard extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.95,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: Colors.grey.shade200),
+              color: Theme.of(context).colorScheme.secondary,),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
             child: Column(
