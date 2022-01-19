@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_book_app/models/book.dart';
 import 'package:flutter_book_app/screens/home_screen.dart';
+import 'package:intl/intl.dart';
 
-class AddBookScreen extends StatelessWidget {
+class AddBookScreen extends StatefulWidget {
   const AddBookScreen({Key? key}) : super(key: key);
 
+  @override
+  State<AddBookScreen> createState() => _AddBookScreenState();
+}
+
+class _AddBookScreenState extends State<AddBookScreen> {
   @override
   Widget build(BuildContext context) {
     TextEditingController _bookController = TextEditingController();
@@ -14,6 +20,7 @@ class AddBookScreen extends StatelessWidget {
     TextEditingController _timeController = TextEditingController();
     Size _size = MediaQuery.of(context).size;
     List<Book> bookList = [];
+    DateFormat dateFormat = DateFormat("dd-MM-yyyy");
 
     return Scaffold(
       appBar: AppBar(
@@ -59,7 +66,16 @@ class AddBookScreen extends StatelessWidget {
             SizedBox(height: _size.height * 0.03),
             ElevatedButton(
                 onPressed: () {
-                  
+                  setState(() {
+                    Book book = Book(
+                      bookName: _bookController.text,
+                      author: _authorController.text,
+                      pageNumber: int.parse(_pageController.text),
+                      time: dateFormat.format(DateTime.now()),
+                    );
+
+                    bookList.add(book);
+                  });
                   Navigator.push(
                     context,
                     MaterialPageRoute(

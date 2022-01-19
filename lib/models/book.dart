@@ -2,7 +2,7 @@ class Book {
   String bookName;
   String author;
   int pageNumber;
-  DateTime time;
+  String time;
 
   Book({
     required this.bookName,
