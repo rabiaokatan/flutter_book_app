@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_book_app/models/book.dart';
+import 'package:flutter_book_app/screens/add_book_screen.dart';
 import 'package:flutter_book_app/screens/settings.dart';
 import 'package:flutter_book_app/widgets/book_card.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  List<Book>? bookList = [];
+  HomeScreen({Key? key, this.bookList}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -12,7 +16,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(    
+    Size _size = MediaQuery.of(context).size;
+    return Scaffold(
       appBar: AppBar(
         title: const Text('Anasayfa'),
         centerTitle: true,
@@ -32,13 +37,30 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: const [
-            BookCard(),
-            BookCard(),
-          ],
-        ),
+      body: widget.bookList!.isNotEmpty
+          ? ListView.builder(
+              padding: EdgeInsets.only(bottom: _size.height * 0.02),
+              itemCount: widget.bookList!.length,
+              itemBuilder: (BuildContext context, int index) {
+                return BookCard(book: widget.bookList![index],);
+              })
+          : Center(
+              child: Text(
+                'Kitap Eklemeye Başla!',
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).primaryColor,
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AddBookScreen()));
+        },
       ),
     );
   }

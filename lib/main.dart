@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'models/book.dart';
 import 'screens/home_screen.dart';
 
 void main() {
@@ -31,13 +32,14 @@ ThemeData _lightTheme = ThemeData(
 // );
 
 class _MyAppState extends State<MyApp> {
+  List<Book> bookList=[];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Book App',
       debugShowCheckedModeBanner: false,
       theme: _lightTheme,
-      home: const HomeScreen(),
+      home: HomeScreen(bookList: bookList,),
     );
   }
 }

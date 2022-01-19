@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_book_app/models/book.dart';
 
 class BookCard extends StatelessWidget {
-  const BookCard({Key? key}) : super(key: key);
+  Book book;
+  BookCard({Key? key, required this.book}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
     return Center(
       child: Padding(
-        padding: const EdgeInsets.only(top: 15),
+        padding: EdgeInsets.only(top: _size.height*0.02),
         child: Container(
           width: _size.width * 0.95,
           decoration: BoxDecoration(
@@ -16,68 +18,84 @@ class BookCard extends StatelessWidget {
             color: Theme.of(context).colorScheme.secondary,
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+            padding: EdgeInsets.symmetric(vertical: _size.height*0.015, horizontal: _size.width*0.03),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    const Text(
+                    Text(
                       "Kitap İsmi: ",
                       style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white70),
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColorDark,
+                      ),
                     ),
                     SizedBox(width: _size.width * 0.005),
                     Text(
-                      "Oblomov",
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+                      book.bookName,
+                      style:const TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
                 Row(
-                  children: const [
+                  children: [
                     Text(
                       "Yazar: ",
                       style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white70),
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColorDark,
+                      ),
                     ),
                     Text(
-                      "Ivan Gonçarov",
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+                      book.author,
+                      style:const TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
                 Row(
-                  children: const [
+                  children: [
                     Text(
                       "Sayfa Sayısı: ",
                       style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white70),
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColorDark,
+                      ),
                     ),
                     Text(
-                      "700",
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+                      "${book.pageNumber}",
+                      style:const TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
                 Row(
-                  children: const [
+                  children: [
                     Text(
                       "Bitirme Tarihi: ",
                       style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white70),
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColorDark,
+                      ),
                     ),
                     Text(
-                      "19.01.2022",
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+                      "${book.time}",
+                      style:const TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
