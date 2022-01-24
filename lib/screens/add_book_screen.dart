@@ -59,20 +59,20 @@ class _AddBookScreenState extends State<AddBookScreen> {
               onTap: () {
                 showDatePicker(
                   context: context,
-                  initialDate: DateTime.now(),//_dateTime == null ? DateTime.now() : _dateTime,
+                  initialDate: DateTime.now(),
                   firstDate: DateTime(2018),
                   lastDate: DateTime(2025),
                 ).then((date) {
                   setState(() {
                     _dateTime = date;
-                    _timeController.text='${_dateTime!.day}/${_dateTime!.month}/${_dateTime!.year} ';//_dateTime.toString();
+                    _timeController.text='${_dateTime!.day}/${_dateTime!.month}/${_dateTime!.year}';
                   });
                 });
               },
               controller: _timeController,
               decoration:  InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: _dateTime == null ? 'Bitirme Tarihi' : '${_dateTime!.day}/${_dateTime!.month}/${_dateTime!.year} ',
+                border:const OutlineInputBorder(),
+                labelText: _dateTime == null ? 'Bitirme Tarihi' : '${_dateTime!.day}/${_dateTime!.month}/${_dateTime!.year}',
               ),
             ),
             SizedBox(height: _size.height * 0.03),
