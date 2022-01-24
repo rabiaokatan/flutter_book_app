@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_book_app/models/book.dart';
 import 'package:flutter_book_app/screens/home_screen.dart';
-import 'package:intl/intl.dart';
 
 class AddBookScreen extends StatefulWidget {
   const AddBookScreen({Key? key}) : super(key: key);
@@ -12,15 +10,16 @@ class AddBookScreen extends StatefulWidget {
 }
 
 class _AddBookScreenState extends State<AddBookScreen> {
+  final TextEditingController _bookController = TextEditingController();
+  final TextEditingController _authorController = TextEditingController();
+  final TextEditingController _pageController = TextEditingController();
+  final TextEditingController _timeController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController _bookController = TextEditingController();
-    TextEditingController _authorController = TextEditingController();
-    TextEditingController _pageController = TextEditingController();
-    TextEditingController _timeController = TextEditingController();
     Size _size = MediaQuery.of(context).size;
     List<Book> bookList = [];
-    DateFormat dateFormat = DateFormat("dd-MM-yyyy");
+    DateTime? _dateTime;
 
     return Scaffold(
       appBar: AppBar(
@@ -57,10 +56,23 @@ class _AddBookScreenState extends State<AddBookScreen> {
             ),
             SizedBox(height: _size.height * 0.02),
             TextField(
+              onTap: () {
+                showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),//_dateTime == null ? DateTime.now() : _dateTime,
+                  firstDate: DateTime(2018),
+                  lastDate: DateTime(2025),
+                ).then((date) {
+                  setState(() {
+                    _dateTime = date;
+                    _timeController.text='${_dateTime!.day}/${_dateTime!.month}/${_dateTime!.year} ';//_dateTime.toString();
+                  });
+                });
+              },
               controller: _timeController,
-              decoration: const InputDecoration(
+              decoration:  InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Bitirme Tarihi',
+                labelText: _dateTime == null ? 'Bitirme Tarihi' : '${_dateTime!.day}/${_dateTime!.month}/${_dateTime!.year} ',
               ),
             ),
             SizedBox(height: _size.height * 0.03),
@@ -71,9 +83,8 @@ class _AddBookScreenState extends State<AddBookScreen> {
                       bookName: _bookController.text,
                       author: _authorController.text,
                       pageNumber: int.parse(_pageController.text),
-                      time: dateFormat.format(DateTime.now()),
+                      time:_timeController.text,
                     );
-
                     bookList.add(book);
                   });
                   Navigator.push(
