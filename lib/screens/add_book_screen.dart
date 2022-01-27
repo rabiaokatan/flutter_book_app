@@ -87,13 +87,14 @@ class _AddBookScreenState extends State<AddBookScreen> {
                     );
                     bookList.add(book);
                   });
-                  Navigator.push(
+                  Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
                       builder: (context) => HomeScreen(
                         bookList: bookList,
                       ),
                     ),
+                     (Route<dynamic> route) => false,
                   );
                 },
                 child: Padding(
