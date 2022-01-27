@@ -59,22 +59,43 @@ CREATE TABLE $tableBooks (
       whereArgs: [id],
     );
 
-    if(maps.isNotEmpty){
+    if (maps.isNotEmpty) {
       return Book.fromJson(maps.first);
-    }
-    else{
+    } else {
       throw Exception('ID $id not found');
     }
   }
 
-  Future<List<Book>> readAllBook() async{
+  Future<List<Book>> readAllBook() async {
     final db = await instance.database;
 
-    final orderBy= '${BookFields.time} ASC';
+    final orderBy = '${BookFields.time} ASC';
 
-    final result= await db.query(tableBooks, orderBy: orderBy);
+    final result = await db.query(tableBooks, orderBy: orderBy);
 
-    return result.map((json)=>Book.fromJson(json)).toList();
+    return result.map((json) => Book.fromJson(json)).toList();
+  }
+
+  Future<int> update(Book book) async {
+    final db = await instance.database;
+
+    return db.update(
+      tableBooks,
+      book.toJson(),
+      where: '${BookFields.id}= ?',
+      whereArgs: [book.id],
+    );
+  }
+
+  //i'll use it soon
+  Future<int> delete(int id) async {
+    final db = await instance.database;
+
+    return await db.delete(
+      tableBooks,
+      where: '${BookFields.id}= ?',
+      whereArgs: [id],
+    );
   }
 
   Future close() async {
