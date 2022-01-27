@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_book_app/db/book_db.dart';
 import 'package:flutter_book_app/models/book.dart';
 import 'package:flutter_book_app/screens/home_screen.dart';
 
 class AddBookScreen extends StatefulWidget {
-  const AddBookScreen({Key? key}) : super(key: key);
+  final Book? book;
+  const AddBookScreen({Key? key, this.book}) : super(key: key);
 
   @override
   State<AddBookScreen> createState() => _AddBookScreenState();
@@ -14,11 +16,36 @@ class _AddBookScreenState extends State<AddBookScreen> {
   final TextEditingController _authorController = TextEditingController();
   final TextEditingController _pageController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
+  bool isLoading = false;
 
+  late String bookName;
+  late String author;
+  late int pageNumber;
+  late String time;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    bookName=widget.book?.bookName ?? '';
+    author=widget.book?.author ?? '';
+    pageNumber=widget.book?.pageNumber ?? 0;
+    time=widget.book?.time ?? '';
+
+    // if (widget.book!.bookName.isNotEmpty) {
+    //   Book book = widget.book!;
+    //   _bookController.text = book.bookName;
+    //   _authorController.text = book.author;
+    //   _pageController.text = book.pageNumber.toString();
+    //   _timeController.text = book.time;
+    // }
+  }
+
+  
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
-    List<Book> bookList = [];
     DateTime? _dateTime;
 
     return Scaffold(
@@ -65,36 +92,29 @@ class _AddBookScreenState extends State<AddBookScreen> {
                 ).then((date) {
                   setState(() {
                     _dateTime = date;
-                    _timeController.text='${_dateTime!.day}/${_dateTime!.month}/${_dateTime!.year}';
+                    _timeController.text =
+                        '${_dateTime!.day}/${_dateTime!.month}/${_dateTime!.year}';
                   });
                 });
               },
               controller: _timeController,
-              decoration:  InputDecoration(
-                border:const OutlineInputBorder(),
-                labelText: _dateTime == null ? 'Bitirme Tarihi' : '${_dateTime!.day}/${_dateTime!.month}/${_dateTime!.year}',
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: _dateTime == null
+                    ? 'Bitirme Tarihi'
+                    : '${_dateTime!.day}/${_dateTime!.month}/${_dateTime!.year}',
               ),
             ),
             SizedBox(height: _size.height * 0.03),
             ElevatedButton(
                 onPressed: () {
-                  setState(() {
-                    Book book = Book(
-                      bookName: _bookController.text,
-                      author: _authorController.text,
-                      pageNumber: int.parse(_pageController.text),
-                      time:_timeController.text,
-                    );
-                    bookList.add(book);
-                  });
+                  addBook();
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => HomeScreen(
-                        bookList: bookList,
-                      ),
+                      builder: (context) => HomeScreen(),
                     ),
-                     (Route<dynamic> route) => false,
+                    (Route<dynamic> route) => false,
                   );
                 },
                 child: Padding(
@@ -111,5 +131,16 @@ class _AddBookScreenState extends State<AddBookScreen> {
         ),
       ),
     );
+  }
+
+  Future addBook() async {
+    final book = Book(
+      bookName: _bookController.text,
+      author: _authorController.text,
+      pageNumber: int.parse(_pageController.text),
+      time: _timeController.text,
+    );
+
+    await BookDatabase.instance.create(book);
   }
 }

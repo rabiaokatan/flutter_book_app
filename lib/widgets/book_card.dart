@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_book_app/db/book_db.dart';
 import 'package:flutter_book_app/models/book.dart';
+import 'package:flutter_book_app/screens/add_book_screen.dart';
 
 class BookCard extends StatefulWidget {
   Book book;
@@ -113,7 +115,16 @@ class _BookCardState extends State<BookCard> {
                 Column(
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: ()async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddBookScreen(
+                              book: widget.book,
+                            ),
+                          ),
+                        );
+                      },
                       color: Theme.of(context).primaryColorDark,
                       icon: const Icon(Icons.edit),
                     ),
@@ -151,7 +162,8 @@ class _BookCardState extends State<BookCard> {
                   'Evet',
                   style: TextStyle(fontSize: 18),
                 ),
-                onPressed: () {
+                onPressed: () async {
+                  await BookDatabase.instance.delete(widget.book.id!);
                   Navigator.of(context).pop();
                 },
               ),

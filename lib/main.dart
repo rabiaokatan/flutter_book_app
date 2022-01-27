@@ -32,14 +32,13 @@ ThemeData _lightTheme = ThemeData(
 // );
 
 class _MyAppState extends State<MyApp> {
-  List<Book> bookList=[];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Book App',
       debugShowCheckedModeBanner: false,
       theme: _lightTheme,
-      home: HomeScreen(bookList: bookList,),
+      home: HomeScreen(),
     );
   }
 }
