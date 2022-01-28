@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
       isLoading = true;
     });
 
-    this.books = await BookDatabase.instance.readAllBook();
+    books = await BookDatabase.instance.readAllBook();
 
     setState(() {
       isLoading = false;
@@ -76,6 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: books.length,
                   itemBuilder: (BuildContext context, int index) {
                     return BookCard(
+                      bookId: books[index].id!,
                       book: books[index],
                     );
                   })
@@ -93,8 +94,14 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.add),
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => AddBookScreen()));
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddBookScreen(),
+            ),
+          );
+
+          refreshBooks();
         },
       ),
     );

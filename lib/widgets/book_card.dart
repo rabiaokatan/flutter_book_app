@@ -4,14 +4,33 @@ import 'package:flutter_book_app/models/book.dart';
 import 'package:flutter_book_app/screens/add_book_screen.dart';
 
 class BookCard extends StatefulWidget {
-  Book book;
-  BookCard({Key? key, required this.book}) : super(key: key);
+  final int bookId;
+  late Book book;
+  BookCard({Key? key, required this.bookId, required this.book})
+      : super(key: key);
 
   @override
   State<BookCard> createState() => _BookCardState();
 }
 
 class _BookCardState extends State<BookCard> {
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    refreshBook();
+  }
+
+  Future refreshBook() async {
+    setState(() => isLoading = true);
+
+    widget.book = await BookDatabase.instance.readBookInfo(widget.bookId);
+
+    setState(() => isLoading = false);
+  }
+
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
@@ -102,7 +121,7 @@ class _BookCardState extends State<BookCard> {
                           ),
                         ),
                         Text(
-                          "${widget.book.time}",
+                          widget.book.time,
                           style: const TextStyle(
                             fontSize: 18,
                             color: Colors.white,
@@ -114,20 +133,26 @@ class _BookCardState extends State<BookCard> {
                 ),
                 Column(
                   children: [
+                    //edit button
                     IconButton(
-                      onPressed: ()async {
+                      onPressed: () async {
+                        if (isLoading) return;
+
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => AddBookScreen(
+                              isPressed: true,
                               book: widget.book,
                             ),
                           ),
                         );
+                        refreshBook();
                       },
                       color: Theme.of(context).primaryColorDark,
                       icon: const Icon(Icons.edit),
                     ),
+                    //clear button
                     IconButton(
                       onPressed: () {
                         _showDialog();
@@ -163,7 +188,7 @@ class _BookCardState extends State<BookCard> {
                   style: TextStyle(fontSize: 18),
                 ),
                 onPressed: () async {
-                  await BookDatabase.instance.delete(widget.book.id!);
+                  await BookDatabase.instance.delete(widget.bookId);
                   Navigator.of(context).pop();
                 },
               ),

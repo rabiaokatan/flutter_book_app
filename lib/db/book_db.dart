@@ -87,7 +87,6 @@ CREATE TABLE $tableBooks (
     );
   }
 
-  //i'll use it soon
   Future<int> delete(int id) async {
     final db = await instance.database;
 

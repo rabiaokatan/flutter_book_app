@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Book App',
       debugShowCheckedModeBanner: false,
       theme: _lightTheme,
-      home: HomeScreen(),
+      home:const HomeScreen(),
     );
   }
 }
