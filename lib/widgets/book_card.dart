@@ -62,7 +62,7 @@ class _BookCardState extends State<BookCard> {
                             color: Theme.of(context).primaryColorDark,
                           ),
                         ),
-                        SizedBox(width: _size.width * 0.005),
+                        SizedBox(width: _size.width * 0.006),
                         Text(
                           widget.book.bookName,
                           style: const TextStyle(
@@ -82,6 +82,7 @@ class _BookCardState extends State<BookCard> {
                             color: Theme.of(context).primaryColorDark,
                           ),
                         ),
+                        SizedBox(width: _size.width * 0.006),
                         Text(
                           widget.book.author,
                           style: const TextStyle(
@@ -101,6 +102,7 @@ class _BookCardState extends State<BookCard> {
                             color: Theme.of(context).primaryColorDark,
                           ),
                         ),
+                        SizedBox(width: _size.width * 0.006),
                         Text(
                           "${widget.book.pageNumber}",
                           style: const TextStyle(
@@ -120,6 +122,7 @@ class _BookCardState extends State<BookCard> {
                             color: Theme.of(context).primaryColorDark,
                           ),
                         ),
+                        SizedBox(width: _size.width * 0.006),
                         Text(
                           widget.book.time,
                           style: const TextStyle(

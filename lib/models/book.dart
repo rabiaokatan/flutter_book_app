@@ -1,4 +1,4 @@
-final String tableBooks = 'books';
+const String tableBooks = 'books';
 
 //for database columns exc.
 class BookFields {

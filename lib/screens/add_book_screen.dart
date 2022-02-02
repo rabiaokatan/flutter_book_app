@@ -30,7 +30,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
+
     super.initState();
 
     bookName = widget.book?.bookName ?? '';
@@ -137,18 +137,6 @@ class _AddBookScreenState extends State<AddBookScreen> {
     );
   }
 
-// void addOrUpdateNote() async {
-////   final isValid = _formKey.currentState!.validate();
-/////   if (isValid) {
-/////     final isUpdating = widget.note != null;
-/////     if (isUpdating) {
-/////       await updateNote();
-/////     } else {
-/////       await addNote();
-/////     }
-/////     Navigator.of(context).pop();
-/////   }
-///// }
   Future updateBook() async {
     final note = widget.book!.copy(
       bookName: _bookController.text,

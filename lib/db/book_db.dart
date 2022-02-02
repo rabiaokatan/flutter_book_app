@@ -69,7 +69,7 @@ CREATE TABLE $tableBooks (
   Future<List<Book>> readAllBook() async {
     final db = await instance.database;
 
-    final orderBy = '${BookFields.time} ASC';
+    const orderBy = '${BookFields.time} ASC';
 
     final result = await db.query(tableBooks, orderBy: orderBy);
 

@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).primaryColorLight,
         child: const Icon(Icons.add),
         onPressed: () {
           Navigator.push(
