@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_book_app/theme.dart';
+import 'package:provider/provider.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -6,8 +8,6 @@ class Settings extends StatefulWidget {
   @override
   State<Settings> createState() => _SettingsState();
 }
-
-bool _light = true;
 
 class _SettingsState extends State<Settings> {
   @override
@@ -24,22 +24,28 @@ class _SettingsState extends State<Settings> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Tema', style: TextStyle(fontSize: 20),),
+                const Text(
+                  'Tema',
+                  style: TextStyle(fontSize: 20),
+                ),
                 const SizedBox(width: 10),
                 Transform.scale(
                   scale: 1.5,
-                  child: Switch(
-                    activeThumbImage:const AssetImage("assets/images/sun.png"),
-                    activeColor: Colors.white,
-                    activeTrackColor: Colors.orange.shade100,
-                    inactiveThumbColor: Colors.black,
-                    inactiveThumbImage: const AssetImage("assets/images/moon1.png"),
-                      value: _light,
+                  child: Consumer<ThemeNotifier>(
+                    builder: (context, notifier, child) => Switch(
+                      activeThumbImage:
+                          const AssetImage("assets/images/sun.png"),
+                      activeColor: Colors.white,
+                      activeTrackColor: Colors.orange.shade100,
+                      inactiveThumbColor: Colors.black,
+                      inactiveThumbImage:
+                          const AssetImage("assets/images/moon1.png"),
+                      value: notifier.lightTheme,
                       onChanged: (state) {
-                        setState(() {
-                          _light = state;
-                        });
-                      }),
+                        notifier.toggleTheme();
+                      },
+                    ),
+                  ),
                 ),
               ],
             ),

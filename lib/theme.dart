@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 ThemeData light = ThemeData(
   primarySwatch: MaterialColor(0xff775447, color),
@@ -50,3 +51,39 @@ Map<int, Color> color = {
   800: const Color.fromRGBO(119, 84, 71, .9),
   900: const Color.fromRGBO(119, 84, 71, 1),
 };
+
+class ThemeNotifier extends ChangeNotifier {
+  final String key = 'theme';
+   SharedPreferences ?_prefs;
+  late bool _lightTheme;
+
+  bool get lightTheme => _lightTheme;
+
+  ThemeNotifier() {
+    _lightTheme = true;
+    _loadFromPrefs();
+  }
+
+  toggleTheme() {
+    _lightTheme = !_lightTheme;
+    _saveToPrefs();
+    notifyListeners();
+  }
+
+  _initPrefs() async {
+    if (_prefs == null) 
+    _prefs = await SharedPreferences.getInstance();
+  }
+
+  _loadFromPrefs() async {
+    await _initPrefs();
+    _lightTheme = _prefs!.getBool(key) ?? true;
+    notifyListeners();
+  }
+
+  _saveToPrefs() async {
+    await _initPrefs();
+    _prefs!.setBool(key, _lightTheme);
+  }
+
+}

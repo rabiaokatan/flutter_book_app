@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_book_app/theme.dart';
+import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
 
 void main() {
@@ -16,12 +17,18 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Book App',
-      debugShowCheckedModeBanner: false,
-      theme: light,
-      home:const HomeScreen(),
+    return ChangeNotifierProvider(
+      create: (_) => ThemeNotifier(),
+      child: Consumer<ThemeNotifier>(
+        builder: (context, ThemeNotifier notifier, child) {
+          return MaterialApp(
+            title: 'Flutter Book App',
+            debugShowCheckedModeBanner: false,
+            theme: notifier.lightTheme ? light : dark,
+            home: const HomeScreen(),
+          );
+        },
+      ),
     );
   }
 }
-
