@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_book_app/db/book_db.dart';
 import 'package:flutter_book_app/models/book.dart';
 import 'package:flutter_book_app/screens/add_book_screen.dart';
 import 'package:flutter_book_app/screens/settings.dart';
 import 'package:flutter_book_app/widgets/book_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -82,7 +82,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   })
               : Center(
                   child: Text(
-                    'Kitap Eklemeye Başla!',
+                    AppLocalizations.of(context)!.welcome_text,
+                    //'Kitap Eklemeye Başla!',
                     style: TextStyle(
                       fontSize: 25,
                       color: Theme.of(context).primaryColor,

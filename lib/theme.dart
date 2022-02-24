@@ -7,6 +7,7 @@ ThemeData light = ThemeData(
   brightness: Brightness.light,
   primaryColorLight: const Color(0xffa78172),
   primaryColorDark: const Color(0xff4a2b20),
+  cardColor: Colors.white,
 );
 
 ThemeData dark = ThemeData(
@@ -36,6 +37,7 @@ ThemeData dark = ThemeData(
   scaffoldBackgroundColor: const Color(0xff4a2b20),
   primaryColorLight: const Color(0xffa78172),
   primaryColorDark: const Color(0xffa78172),
+  cardColor: const Color(0xffa78172),
 );
 
 //for hex color to material color

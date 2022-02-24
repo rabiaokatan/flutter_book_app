@@ -1,0 +1,7 @@
+{
+    "language": "English",
+    "@language":{ 
+        "description": "The current lang"
+    },
+    "welcome_text": "Start adding books!"  
+}

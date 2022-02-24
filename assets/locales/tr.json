@@ -1,0 +1,12 @@
+{
+    "start_adding_book":"Kitap Eklemeye Başla!",
+    "homepage": "Anasayfa",
+    "settings": "Ayarlar",
+    "theme": "Tema",
+    "language": "Dil",
+    "add_book": "Kitap Ekle",
+    "book_name": "Kitap Adı",
+    "author": "Yazar",
+    "page_number": "Sayfa Sayısı",
+    "end_date": "Bitiş Tarihi"
+}
