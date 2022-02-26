@@ -3,6 +3,7 @@ import 'package:flutter_book_app/l10n/l10n.dart';
 import 'package:flutter_book_app/provider/locale_provider.dart';
 import 'package:flutter_book_app/theme.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _SettingsState extends State<Settings> {
     final locale = provider.locale; // ?? Locale('en', 'US');
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ayarlar'),
+        title:  Text(AppLocalizations.of(context)!.settings),
         centerTitle: true,
       ),
       body: Padding(
@@ -29,7 +30,7 @@ class _SettingsState extends State<Settings> {
             //   mainAxisAlignment: MainAxisAlignment.center,
             //   children: [
             //     const Text(
-            //       'Tema',
+            //       AppLocalizations.of(context)!.theme,
             //       style: TextStyle(fontSize: 20),
             //     ),
             //     const SizedBox(width: 10),
@@ -57,9 +58,9 @@ class _SettingsState extends State<Settings> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'Dil',
-                  style: TextStyle(fontSize: 26),
+               Text(
+                  AppLocalizations.of(context)!.language_text,
+                  style:const TextStyle(fontSize: 26),
                 ),
                 const SizedBox(width: 15),
                 DropdownButton(

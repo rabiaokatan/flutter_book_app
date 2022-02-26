@@ -1,4 +1,19 @@
 {
     "language": "Türkçe",
-    "welcome_text": "Kitap eklemeye başlayın!"
+    "welcome_text": "Kitap eklemeye başlayın!",
+    "add_book": "Kitap Ekle",
+    "edit":"Düzenle",
+    "delete": "Sil",
+    "home_page": "Anasayfa",
+    "settings":"Ayarlar",
+    "language_text": "Dil",
+    "theme":"Tema",
+    "book_name":"Kitap Adı",
+    "author": "Yazar",
+    "pages": "Sayfa Sayısı",
+    "finish_date": "Bitiş Tarihi",
+    "are_you_sure": "Silmek istediğinize emin misiniz?",
+    "yes":"Evet",
+    "no": "Hayır"
+
 }

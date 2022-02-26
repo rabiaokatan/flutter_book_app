@@ -3,5 +3,20 @@
     "@language":{ 
         "description": "The current lang"
     },
-    "welcome_text": "Start adding books!"  
+    "welcome_text": "Start adding book!",
+    "add_book": "Add Book",
+    "edit":"Edit",
+    "delete": "Delete",
+    "home_page": "Home Page",
+    "settings":"Settings",
+    "language_text": "Language",
+    "theme":"Theme",
+    "book_name":"Book Name",
+    "author": "Author",
+    "pages": "Pages",
+    "finish_date": "Finish Date",
+    "are_you_sure": "Are you sure you want to delete it?",
+    "yes":"Yes",
+    "no": "No"
+
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_book_app/db/book_db.dart';
 import 'package:flutter_book_app/models/book.dart';
 import 'package:flutter_book_app/screens/add_book_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BookCard extends StatefulWidget {
   final int bookId;
@@ -55,7 +56,7 @@ class _BookCardState extends State<BookCard> {
                     Row(
                       children: [
                         Text(
-                          "Kitap İsmi: ",
+                          AppLocalizations.of(context)!.book_name,
                           style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -75,7 +76,7 @@ class _BookCardState extends State<BookCard> {
                     Row(
                       children: [
                         Text(
-                          "Yazar: ",
+                          AppLocalizations.of(context)!.author,
                           style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -95,7 +96,7 @@ class _BookCardState extends State<BookCard> {
                     Row(
                       children: [
                         Text(
-                          "Sayfa Sayısı: ",
+                          AppLocalizations.of(context)!.pages,
                           style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -115,7 +116,7 @@ class _BookCardState extends State<BookCard> {
                     Row(
                       children: [
                         Text(
-                          "Bitirme Tarihi: ",
+                          AppLocalizations.of(context)!.finish_date,
                           style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -181,13 +182,13 @@ class _BookCardState extends State<BookCard> {
         return AlertDialog(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-          title: const Text("Silmek istediğinize emin misiniz?"),
+          title: Text(AppLocalizations.of(context)!.are_you_sure),
           actions: <Widget>[
             Padding(
               padding: const EdgeInsets.only(right: 10.0),
               child: TextButton(
-                child: const Text(
-                  'Evet',
+                child: Text(
+                  AppLocalizations.of(context)!.yes,
                   style: TextStyle(fontSize: 18),
                 ),
                 onPressed: () async {
@@ -197,8 +198,8 @@ class _BookCardState extends State<BookCard> {
               ),
             ),
             TextButton(
-              child: const Text(
-                'Hayır',
+              child: Text(
+                AppLocalizations.of(context)!.no,
                 style: TextStyle(fontSize: 18),
               ),
               onPressed: () {

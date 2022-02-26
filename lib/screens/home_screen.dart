@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Size _size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Anasayfa'),
+        title: Text(AppLocalizations.of(context)!.home_page),
         centerTitle: true,
         actions: [
           IconButton(
@@ -83,7 +83,6 @@ class _HomeScreenState extends State<HomeScreen> {
               : Center(
                   child: Text(
                     AppLocalizations.of(context)!.welcome_text,
-                    //'Kitap Eklemeye Başla!',
                     style: TextStyle(
                       fontSize: 25,
                       color: Theme.of(context).primaryColor,
