@@ -26,13 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
     refreshBooks();
   }
 
-  @override
-  void dispose() {
-    BookDatabase.instance.close();
-
-    super.dispose();
-  }
-
   Future refreshBooks() async {
     setState(() {
       isLoading = true;

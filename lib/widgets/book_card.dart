@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_book_app/db/book_db.dart';
 import 'package:flutter_book_app/models/book.dart';
 import 'package:flutter_book_app/screens/add_book_screen.dart';
+import 'package:flutter_book_app/screens/home_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BookCard extends StatefulWidget {
@@ -142,6 +143,12 @@ class _BookCardState extends State<BookCard> {
                       onPressed: () async {
                         if (isLoading) return;
 
+                        void dispose() {
+                          BookDatabase.instance.close();
+
+                          super.dispose();
+                        }
+
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -189,18 +196,25 @@ class _BookCardState extends State<BookCard> {
               child: TextButton(
                 child: Text(
                   AppLocalizations.of(context)!.yes,
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
                 onPressed: () async {
                   await BookDatabase.instance.delete(widget.bookId);
-                  Navigator.of(context).pop();
+                  // Navigator.of(context).pop();
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HomeScreen(),
+                    ),
+                    (Route<dynamic> route) => false,
+                  );
                 },
               ),
             ),
             TextButton(
               child: Text(
                 AppLocalizations.of(context)!.no,
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
               onPressed: () {
                 Navigator.of(context).pop();
