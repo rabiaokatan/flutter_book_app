@@ -17,50 +17,52 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     final provider = Provider.of<LocaleProvider>(context);
     final locale = provider.locale; // ?? Locale('en', 'US');
+    Size _size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title:  Text(AppLocalizations.of(context)!.settings),
+        title: Text(AppLocalizations.of(context)!.settings),
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15),
+        padding:
+            EdgeInsets.symmetric(vertical: _size.height*0.05, horizontal: _size.width * 0.2),
         child: Column(
           children: [
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     const Text(
-            //       AppLocalizations.of(context)!.theme,
-            //       style: TextStyle(fontSize: 20),
-            //     ),
-            //     const SizedBox(width: 10),
-            //     Transform.scale(
-            //       scale: 1.5,
-            //       child: Consumer<ThemeNotifier>(
-            //         builder: (context, notifier, child) => Switch(
-            //           activeThumbImage:
-            //               const AssetImage("assets/images/sun.png"),
-            //           activeColor: Colors.white,
-            //           activeTrackColor: Colors.orange.shade100,
-            //           inactiveThumbColor: Colors.black,
-            //           inactiveThumbImage:
-            //               const AssetImage("assets/images/moon1.png"),
-            //           value: notifier.lightTheme,
-            //           onChanged: (state) {
-            //             notifier.toggleTheme();
-            //           },
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  AppLocalizations.of(context)!.theme,
+                  style: const TextStyle(fontSize: 26),
+                ),
+                const SizedBox(width: 10),
+                Transform.scale(
+                  scale: 1.5,
+                  child: Consumer<ThemeNotifier>(
+                    builder: (context, notifier, child) => Switch(
+                      activeThumbImage:
+                          const AssetImage("assets/images/sun.png"),
+                      activeColor: Colors.white,
+                      activeTrackColor: Colors.orange.shade100,
+                      inactiveThumbColor: Colors.black,
+                      inactiveThumbImage:
+                          const AssetImage("assets/images/moon1.png"),
+                      value: notifier.lightTheme,
+                      onChanged: (state) {
+                        notifier.toggleTheme();
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
             const SizedBox(height: 10),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-               Text(
+                Text(
                   AppLocalizations.of(context)!.language_text,
-                  style:const TextStyle(fontSize: 26),
+                  style: const TextStyle(fontSize: 26),
                 ),
                 const SizedBox(width: 15),
                 DropdownButton(

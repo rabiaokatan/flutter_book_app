@@ -21,31 +21,34 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) =>
-          // {
-          // ThemeNotifier();
-          LocaleProvider(),
-      //},
-      // child: Consumer<ThemeNotifier>(
-      builder: (context, /*ThemeNotifier notifier,*/ child) {
-        final provider = Provider.of<LocaleProvider>(context);
-        return MaterialApp(
-          title: 'Flutter Book App',
-          debugShowCheckedModeBanner: false,
-          //theme: notifier.lightTheme ? light : dark,
-          locale: provider.locale,
-          supportedLocales: L10n.all,
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-          ],
-          home: const HomeScreen(),
-        );
-      },
-      //  ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => LocaleProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ThemeNotifier(),
+        ),
+      ],
+      child: Consumer<ThemeNotifier>(
+        builder: (context, ThemeNotifier notifier, child) {
+          final provider = Provider.of<LocaleProvider>(context);
+          return MaterialApp(
+            title: 'Flutter Book App',
+            debugShowCheckedModeBanner: false,
+            theme: notifier.lightTheme ? light : dark,
+            locale: provider.locale,
+            supportedLocales: L10n.all,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
+            home: const HomeScreen(),
+          );
+        },
+      ),
     );
   }
 }
